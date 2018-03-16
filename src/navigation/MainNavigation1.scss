@@ -1,0 +1,143 @@
+@import '../css/core.scss';
+
+.main-navigation-mobile {
+  height: 9%;
+  width: 100%;
+  padding: 0 12.5px 0 0;
+  border-bottom: solid 1px $gray-dark-darkened;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav-left {
+    > div.logo {
+      height: 30px;
+      width: 121px;
+      margin: 10px 20px;
+      background-color: $green-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .nav-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .nav-item {
+    padding: 10px 7.5px 0 7.5px;
+    position: relative;
+    font-family: CircularStd, sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $black;
+    transition: 0.3s;
+    align-items: center;
+
+    .icon {
+      position: relative;
+    }
+  }
+}
+
+.main-navigation-1 {
+  height: 70px;
+  width: 100%;
+  border-bottom: solid 1px $gray;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  .nav-left {
+    > div.logo {
+      height: 50px;
+      width: 200px;
+      margin: 10px 0;
+      background-color: $green-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .nav-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .nav-item {
+    position: relative;
+    margin: 0;
+    padding: 20px 15px;
+    font-family: CircularStd, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $black;
+    transition: 0.3s;
+
+    .icon {
+      margin-right: 5px;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .button-format {
+    height: 70px;
+  }
+
+  .nav-item.register {
+    padding-right: 0;
+  }
+
+  .nav-item.nav-user {
+    font-size: 40px;
+    line-height: 1em;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: row;
+    .icon-username {
+      font-size: 17px;
+      white-space: nowrap;
+      border-left: none;
+    }
+    span {
+      display: block;
+      padding-left: 15px;
+      border-left: 2px solid $black;
+    }
+  }
+
+  .nav-item.active {
+    color: #3ac47a;
+    box-shadow: 0 5px 0 $green-primary;
+  }
+
+  .nav-item:hover {
+    cursor: pointer;
+    color: $green-primary;
+    box-shadow: 0 5px 0 $green-primary;
+
+    &.nav-vertical-bar {
+      cursor: default;
+      color: $black;
+      box-shadow: none;
+    }
+
+    &.nav-user, &.register {
+      box-shadow: none;
+    }
+  }
+}

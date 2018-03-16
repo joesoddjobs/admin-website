@@ -1,0 +1,16 @@
+@import '../css/core.scss';
+
+.App {
+  width: 66%;
+  min-width: 800px;
+  padding: 0 15px;
+  margin: auto;
+
+  @media screen and (max-device-width: 705px) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 30px;
+    padding: 0;
+    margin: 0;
+  }
+}

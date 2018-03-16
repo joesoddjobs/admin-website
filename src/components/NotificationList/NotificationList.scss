@@ -1,0 +1,27 @@
+@import '../../css/core.scss';
+
+.NotificationList {
+  position: fixed;
+  width: 60%;
+  bottom: 3%;
+  left: 20%;
+  z-index: $modal-overlay-z-index + 1;
+
+  .notificationItem-enter {
+    opacity: 0.01;
+  }
+
+  .notificationItem-enter.notificationItem-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+
+  .notificationItem-leave {
+    opacity: 1;
+  }
+
+  .notificationItem-leave.notificationItem-leave-active {
+    opacity: 0.01;
+    transition: opacity 3000ms ease-in;
+  }
+}
