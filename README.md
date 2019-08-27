@@ -1,35 +1,37 @@
-# React starter app
+# DEV React-Apollo Starter App
 
-This is the repository for a react webapp starter app. The project is a [React](Reactjs.org) built on top of a [Create React App](https://github.com/facebook/create-react-app) and it utilizes [Redux](https://redux.js.org).
+**NOTE: Update the title and provide a description here for your new project once started**
 
-The App uses Eslint to enforce style rules.
+This is a repository with starter code for new frontend web projects at DEV.
 
-## Running instructions
-1. Clone the repo.
-2. Run `npm install`.
-3. Run `npm run start`.
+## Starting a New Project
 
-## Development pipeline
-1. Make a new topic branch.
-2. Make your changes.
-4. Run `npm run lint` to check for style mistakes.
-  - Code that has errors from the linter will not be merged in. Warnings are fine, but should be dealt with if possible.
-5. Push your code.
-6. Open a Pull Request.
-7. After your code has been approved, it will be merged into master.
+**NOTE: Delete this section in the README once you have started the new project**
 
-## Documentation
+Run these commands to start a new project built off of this repository.
 
-### Code structure
+```bash
+$ git clone https://github.com/hsadev/react-frontend-starter.git <YOUR_PROJECT_NAME> && cd <YOUR_PROJECT_NAME> # clone repo 
+$ rm -rf .git # delete original git history
+$ git init # create new git repository
+$ git remote add origin <YOUR_PROJECT_GIT_REPOSITORY> # add remote for github repo
+$ git add . # stage all files to be commited
+$ git commit -m "Initial Commit" # set up the initial commit
+$ git push -u origin master # set the target branch and push to remote
+```
 
-Most of the code lives in the `src` folder. For specific pages, the code should go into `src/pages/<name of the page>`. Reusable componenets (such as a custom button or input field) should go in `src/components/<name of component/component group>`.
+## Project Structure
+The repo was built by the general frontend web file structure conventions we use at DEV. It has react-router, apollo-client, and ThemeProvider from styled-components set up in src/App.js. It also has a full devloper environment with prettier, eslint, and travis set up.
 
-The files for each component should be together in the same directory (`.js`, `.scss`). Global style files should go in `src/css`.
+This repository was designed first and foremost to scale to large projects. It should be easy to extend the base file structure and setup here to much larger projects.
 
-### Persisting Redux State (context: src/redux)
-In order to allow faster content loading, the in-memory redux state is persisted using the `saveState` function. When the
-application is reloaded, this persisted state is retrieved using rhe `loadState` function. 
-  * The first time `loadState` is called, if there was a persisted state in `localstorage`, it should save the `reduxStateKey` in memory.
-  * If no persisted state in `localstorage`, it should create a new unique `reduxStateKey`, save it to both `localstorage` and in memory.
-  * Anytime the store is cleared, a new `reduxStateKey` should be created and replace the in-memory and `localstorage` `reduxStateKey`.
-  * `saveState` should only save in-memory redux state to `localstorage` if the in-memory `reduxStateKey` matches `localstorage` `reduxStateKey`.  
+## Set up
+To install all dependecies run:
+```bash
+$ npm i
+```
+## Running
+To host the website locally run:
+```bash
+$ npm start
+```
