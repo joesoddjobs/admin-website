@@ -1,6 +1,0 @@
-export { default as AboutUsBlock } from './AboutUsBlock'
-export { default as BookAJobBlock } from './BookAJobBlock'
-export { default as IntroBlock } from './IntroBlock'
-export { default as JobTypesBlock } from './JobTypesBlock'
-export { default as PriceBlock } from './PriceBlock'
-export { default as TestimonialBlock } from './TestimonialBlock'
