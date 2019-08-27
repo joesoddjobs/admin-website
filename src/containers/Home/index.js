@@ -1,23 +1,11 @@
-import React from 'react'
-import { Container } from './styles'
-import {
-  AboutUsBlock,
-  BookAJobBlock,
-  IntroBlock,
-  JobTypesBlock,
-  PriceBlock,
-  TestimonialBlock
-} from './components'
+import React from "react";
+import { Container } from "./styles";
+import WrappedSignIn from "../SignIn";
 
-const Home = () => (
+const Home = ({ history }) => (
   <Container>
-    <IntroBlock />
-    <JobTypesBlock />
-    <PriceBlock />
-    <AboutUsBlock />
-    <TestimonialBlock />
-    <BookAJobBlock />
+    <WrappedSignIn history={history} />
   </Container>
-)
+);
 
-export default Home
+export default Home;

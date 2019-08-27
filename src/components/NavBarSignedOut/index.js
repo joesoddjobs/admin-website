@@ -1,14 +1,13 @@
-import React from 'react'
-import { Container, JoesOddJobsLogo } from './styles'
-import RoutesRow from './components/RoutesRow'
+import React from "react";
+import { Container, JoesOddJobsLogo, AdminText } from "./styles";
 
 const NavBarSignedOut = () => {
   return (
     <Container>
       <JoesOddJobsLogo />
-      <RoutesRow />
+      <AdminText>Admin Portal</AdminText>
     </Container>
-  )
-}
+  );
+};
 
-export default NavBarSignedOut
+export default NavBarSignedOut;
