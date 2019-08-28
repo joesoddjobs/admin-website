@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import { styles } from "./styles";
+import CurrentScreen from "./components/CurrentScreen";
+
+const Dashboard = ({ classes, history }) => {
+  const [tab, setTab] = useState(0);
+
+  const handleChange = (event, newTabValue) => {
+    setTab(newTabValue);
+  };
+
+  return (
+    <>
+      <Paper className={classes.root}>
+        <Tabs
+          value={tab}
+          onChange={handleChange}
+          textColor="primary"
+          indicatorColor="primary"
+          centered
+        >
+          <Tab label="Workers" />
+          <Tab label="Jobs" />
+          <Tab label="Customers" />
+        </Tabs>
+      </Paper>
+      <CurrentScreen tab={tab} history={history} />
+    </>
+  );
+};
+
+export default withStyles(styles)(Dashboard);
