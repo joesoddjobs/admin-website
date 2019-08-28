@@ -38,20 +38,25 @@ export const tableIcons = {
 };
 
 export const columns = [
-  { title: "First Name", field: "firstName" },
-  { title: "Last Name", field: "lastName" },
-  { title: "Email", field: "email" },
-  { title: "Jobs", field: "jobs" },
-  { title: "Phone Number", field: "phoneNumber" },
-  { title: "Address", field: "address" },
-  { title: "Income", field: "income" },
-  { title: "Age", field: "age" }
+  { title: "Customer", field: "customer" },
+  { title: "Job Type", field: "jobType" },
+  { title: "Contractors", field: "contractors" },
+  { title: "Scheduled Date", field: "scheduledDateTime" },
+  { title: "Estimated Time", field: "estimatedTime" },
+  { title: "Rate", field: "rate" },
+  { title: "Actual Time", field: "actualTime" },
+  { title: "Status", field: "status" }
 ];
 
 export const actions = () => [
   {
     icon: tableIcons.Edit,
     tooltip: "Edit",
+    iconProps: { fontSize: "small", color: "primary" }
+  },
+  {
+    icon: tableIcons.Check,
+    tooltip: "Mark completed",
     iconProps: { fontSize: "small", color: "primary" }
   }
 ];
