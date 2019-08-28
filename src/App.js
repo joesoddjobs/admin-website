@@ -7,6 +7,7 @@ import client from "./client";
 import Home from "./containers/Home/";
 import WrappedSignIn from "./containers/SignIn/";
 import { Footer, NavBarSignedIn, NavBarSignedOut } from "./components";
+import Dashboard from "./containers/Dashboard";
 
 const isSignedIn = async () => {
   const token = await localStorage.getItem("token");
@@ -34,6 +35,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/sign-in" component={WrappedSignIn} />
+              <Route path="/dashboard" component={Dashboard} />
             </Switch>
             <Footer />
           </ApolloProvider>
