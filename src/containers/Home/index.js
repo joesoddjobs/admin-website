@@ -1,11 +1,11 @@
 import React from "react";
-import { Container } from "./styles";
 import WrappedSignIn from "../SignIn";
+import Background from "../../components/Background";
 
 const Home = ({ history }) => (
-  <Container>
+  <Background>
     <WrappedSignIn history={history} />
-  </Container>
+  </Background>
 );
 
 export default Home;
