@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { styles } from "./styles";
 import CurrentScreen from "./components/CurrentScreen";
+import Background from "../../components/Background";
 
 const Dashboard = ({ classes, history }) => {
   const [tab, setTab] = useState(0);
@@ -14,7 +15,7 @@ const Dashboard = ({ classes, history }) => {
   };
 
   return (
-    <>
+    <Background>
       <Paper className={classes.root}>
         <Tabs
           value={tab}
@@ -29,7 +30,7 @@ const Dashboard = ({ classes, history }) => {
         </Tabs>
       </Paper>
       <CurrentScreen tab={tab} history={history} />
-    </>
+    </Background>
   );
 };
 
