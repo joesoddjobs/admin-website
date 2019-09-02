@@ -61,7 +61,7 @@ export const actions = () => [
   }
 ];
 
-export const editable = (addVerifiedEmail, removeVerifiedEmail) => ({
+export const editable = (deleteJob) => ({
   onRowAdd: ({ email }) =>
     new Promise(resolve => {
       setTimeout(() => {
@@ -72,7 +72,7 @@ export const editable = (addVerifiedEmail, removeVerifiedEmail) => ({
   onRowDelete: ({ id }) =>
     new Promise(resolve => {
       setTimeout(() => {
-        // removeVerifiedEmail({ variables: { id } });
+        deleteJob({ variables: { jobId: id } });
         resolve();
       }, 1000);
     })

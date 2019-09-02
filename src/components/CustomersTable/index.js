@@ -2,7 +2,7 @@ import React from "react";
 import MaterialTable from "material-table";
 import { tableIcons, editable, actions, columns } from "./constants";
 
-const CustomersTable = () => (
+const CustomersTable = ({ data }) => (
   <MaterialTable
     title="Customers"
     icons={tableIcons}
@@ -10,7 +10,8 @@ const CustomersTable = () => (
     actions={actions()}
     columns={columns}
     style={{ width: "100%" }}
-    options={{ filtering: true }}
+    options={{ filtering: true, pageSize: 10, pageSizeOptions: [10, 20, 50] }}
+    data={data}
   />
 );
 
