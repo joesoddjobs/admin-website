@@ -1,7 +1,7 @@
 import React from "react";
-import WorkersTable from "../../../../components/WorkersTable";
-import JobsTable from "../../../../components/JobsTable";
-import CustomersTable from "../../../../components/CustomersTable";
+import Jobs from "./components/Jobs";
+import Customers from "./components/Customers";
+import Workers from "./components/Workers";
 
 const WORKERS = 0;
 const JOBS = 1;
@@ -9,11 +9,11 @@ const JOBS = 1;
 const CurrentScreen = ({ tab }) => {
   switch (tab) {
     case WORKERS:
-      return <WorkersTable />;
+      return <Workers />;
     case JOBS:
-      return <JobsTable />;
+      return <Jobs />;
     default:
-      return <CustomersTable />;
+      return <Customers />;
   }
 };
 
