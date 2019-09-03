@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import client from "./client";
@@ -12,6 +14,13 @@ import Dashboard from "./containers/Dashboard";
 const isSignedIn = async () => {
   const token = await localStorage.getItem("token");
   return token !== null;
+};
+
+const options = {
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: "30px",
+  transition: transitions.SCALE
 };
 
 class App extends Component {
@@ -31,13 +40,15 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
-            {signedIn ? <NavBarSignedIn /> : <NavBarSignedOut />}
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/sign-in" component={WrappedSignIn} />
-              <Route path="/dashboard" component={Dashboard} />
-            </Switch>
-            <Footer />
+            <AlertProvider template={AlertTemplate} {...options}>
+              {signedIn ? <NavBarSignedIn /> : <NavBarSignedOut />}
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/sign-in" component={WrappedSignIn} />
+                <Route path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Footer />
+            </AlertProvider>
           </ApolloProvider>
         </ThemeProvider>
       </Router>
