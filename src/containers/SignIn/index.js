@@ -1,7 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from "react";
-import { Form, Input, Button } from "antd";
+import { withAlert } from "react-alert";
+import { Form, Input, Button, Alert } from "antd";
 import { Wrapper, BodyWrapper, Header, ButtonContainer } from "./styles";
+import { Mutation } from "react-apollo";
+import { LOGIN_ADMIN } from "./graphql";
+
+const storeAdmin = async ({ loginAdmin: { admin, token, error } }) => {
+  if (!error) {
+    await localStorage.setItem("token", token);
+    await localStorage.setItem("adminId", admin.id);
+  } else {
+    Alert("Could not register! Please try again!");
+  }
+};
 
 class SignIn extends Component {
   constructor(props) {
@@ -13,14 +25,11 @@ class SignIn extends Component {
     };
   }
 
-  handleSubmit = (e, history) => {
+  handleSubmit = (e, history, loginAdmin) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // navigate to dashboard:
-        history.push({
-          pathname: "/dashboard"
-        });
+        loginAdmin({ variables: values });
       }
     });
   };
@@ -77,45 +86,60 @@ class SignIn extends Component {
       <BodyWrapper>
         <Wrapper>
           <Header>Sign In</Header>
-          <Form
-            {...formItemLayout}
-            onSubmit={e => this.handleSubmit(e, history)}
+          <Mutation
+            mutation={LOGIN_ADMIN}
+            onCompleted={async data => {
+              await storeAdmin(data);
+              this.props.alert.success("Successfully signed in!");
+              // navigate to dashboard:
+              history.push({
+                pathname: "/dashboard"
+              });
+            }}
+            onError={() => this.props.alert.error("Could not sign in.")}
           >
-            <Form.Item label="E-mail">
-              {getFieldDecorator("email", {
-                rules: [
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!"
-                  },
-                  {
-                    required: true,
-                    message: "Please input your E-mail!"
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item label="Password" hasFeedback>
-              {getFieldDecorator("password", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please input your password!"
-                  },
-                  {
-                    validator: this.validateToNextPassword
-                  }
-                ]
-              })(<Input.Password />)}
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-              <ButtonContainer>
-                <Button type="primary" htmlType="submit">
-                  Sign In
-                </Button>
-              </ButtonContainer>
-            </Form.Item>
-          </Form>
+            {loginAdmin => (
+              <Form
+                {...formItemLayout}
+                onSubmit={e => this.handleSubmit(e, history, loginAdmin)}
+              >
+                <Form.Item label="E-mail">
+                  {getFieldDecorator("email", {
+                    rules: [
+                      {
+                        type: "email",
+                        message: "The input is not valid E-mail!"
+                      },
+                      {
+                        required: true,
+                        message: "Please input your E-mail!"
+                      }
+                    ]
+                  })(<Input />)}
+                </Form.Item>
+                <Form.Item label="Password" hasFeedback>
+                  {getFieldDecorator("password", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please input your password!"
+                      },
+                      {
+                        validator: this.validateToNextPassword
+                      }
+                    ]
+                  })(<Input.Password />)}
+                </Form.Item>
+                <Form.Item {...tailFormItemLayout}>
+                  <ButtonContainer>
+                    <Button type="primary" htmlType="submit">
+                      Sign In
+                    </Button>
+                  </ButtonContainer>
+                </Form.Item>
+              </Form>
+            )}
+          </Mutation>
         </Wrapper>
       </BodyWrapper>
     );
@@ -124,4 +148,4 @@ class SignIn extends Component {
 
 const WrappedSignIn = Form.create({ name: "register" })(SignIn);
 
-export default WrappedSignIn;
+export default withAlert()(WrappedSignIn);
