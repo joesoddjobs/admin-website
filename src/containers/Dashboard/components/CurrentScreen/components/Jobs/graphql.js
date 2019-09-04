@@ -1,10 +1,17 @@
 import gql from "graphql-tag";
 
-const GET_ALL_JOBS = gql`
+export const GET_ALL_JOBS = gql`
   query getAllJobs {
     getAllJobs {
       id
       customerId
+      customer {
+        id
+        firstName
+        lastName
+        email
+        phoneNumber
+      }
       status
       contractors {
         id
@@ -33,4 +40,13 @@ const GET_ALL_JOBS = gql`
   }
 `;
 
-export default GET_ALL_JOBS;
+export const DELETE_JOB = gql`
+  mutation deleteJob($jobId: ID!) {
+    deleteJob(jobId: $jobId) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`;

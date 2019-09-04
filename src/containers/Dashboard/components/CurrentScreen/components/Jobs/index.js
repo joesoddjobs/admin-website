@@ -1,7 +1,9 @@
 import React from "react";
-import JobsTable from "../../../../../../components/JobsTable";
 import { Query } from "react-apollo";
-import GET_ALL_JOBS from "./graphql";
+import moment from "moment";
+import JobsTable from "../../../../../../components/JobsTable";
+import { GET_ALL_JOBS } from "./graphql";
+import { deleteJob } from "./helpers";
 
 const Jobs = () => (
   <Query query={GET_ALL_JOBS}>
@@ -20,21 +22,25 @@ const Jobs = () => (
           rate,
           scheduledDateTime,
           contractors,
+          customer,
           ...rest
         }) => {
+          const { id, firstName, lastName, ...customerInfo } = customer;
           const action = {
-            customer: "Hello",
+            customer: `${firstName} ${lastName}`,
+            customerId: id,
             contractors: " ", // TODO: Need to fix this
             status,
             jobType,
             rate,
-            scheduledDateTime,
-            ...rest
+            scheduledDateTime: moment(Date(scheduledDateTime)).format("LLL"),
+            ...rest,
+            ...customerInfo
           };
           formattedData.push(action);
         }
       );
-      return <JobsTable data={formattedData} />;
+      return <JobsTable data={formattedData} deleteJob={deleteJob} />;
     }}
   </Query>
 );
