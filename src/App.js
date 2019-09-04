@@ -9,7 +9,7 @@ import theme from "./theme";
 import client from "./client";
 import Home from "./containers/Home/";
 import WrappedSignIn from "./containers/SignIn/";
-import { Footer, NavBarSignedIn, NavBarSignedOut } from "./components";
+import { Footer, NavBar } from "./components";
 import Dashboard from "./containers/Dashboard";
 
 const isSignedIn = async () => {
@@ -42,7 +42,7 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
             <AlertProvider template={AlertTemplate} {...options}>
-              {signedIn ? <NavBarSignedIn /> : <NavBarSignedOut />}
+              <NavBar />
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/sign-in" component={WrappedSignIn} />
