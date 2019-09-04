@@ -2,11 +2,11 @@ import React from "react";
 import MaterialTable from "material-table";
 import { columns, actions, editable, tableIcons } from "./constants";
 
-const WorkersTable = ({ data }) => (
+const WorkersTable = ({ data, deleteContractor }) => (
   <MaterialTable
     title="Workers"
     columns={columns}
-    editable={editable()}
+    editable={editable(deleteContractor)}
     actions={actions()}
     icons={tableIcons}
     style={{ width: "100%" }}

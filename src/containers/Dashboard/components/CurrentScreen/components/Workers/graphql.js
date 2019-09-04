@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const GET_ALL_WORKERS = gql`
+export const GET_ALL_WORKERS = gql`
   query getAllContractors {
     getAllContractors {
       id
@@ -23,4 +23,13 @@ const GET_ALL_WORKERS = gql`
   }
 `;
 
-export default GET_ALL_WORKERS;
+export const DELETE_CONTRACTOR = gql`
+  mutation deleteContractor($contractorId: ID!) {
+    deleteContractor(contractorId: $contractorId) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`;
