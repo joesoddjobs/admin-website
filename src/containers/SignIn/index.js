@@ -2,16 +2,16 @@
 import React, { Component } from "react";
 import { withAlert } from "react-alert";
 import { Form, Input, Button, Alert } from "antd";
+import localStore from "store";
 import { Wrapper, BodyWrapper, Header, ButtonContainer } from "./styles";
 import { Mutation } from "react-apollo";
 import { LOGIN_ADMIN } from "./graphql";
 
 const storeAdmin = async ({ loginAdmin: { admin, token, error } }) => {
   if (!error) {
-    await localStorage.setItem("token", token);
-    await localStorage.setItem("adminId", admin.id);
+    localStore.set("admin", { token });
   } else {
-    Alert("Could not register! Please try again!");
+    Alert("Could not sign in! Please try again!");
   }
 };
 

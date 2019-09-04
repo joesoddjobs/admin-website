@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import { ThemeProvider } from "styled-components";
+import localStore from "store";
 import theme from "./theme";
 import client from "./client";
 import Home from "./containers/Home/";
@@ -12,7 +13,7 @@ import { Footer, NavBarSignedIn, NavBarSignedOut } from "./components";
 import Dashboard from "./containers/Dashboard";
 
 const isSignedIn = async () => {
-  const token = await localStorage.getItem("token");
+  const token = await localStore.get("admin");
   return token !== null;
 };
 
