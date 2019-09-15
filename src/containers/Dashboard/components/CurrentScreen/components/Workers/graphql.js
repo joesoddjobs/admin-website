@@ -18,6 +18,9 @@ export const GET_ALL_WORKERS = gql`
         yearToDate
         total
       }
+      jobs {
+        jobDescription
+      }
       age
     }
   }
