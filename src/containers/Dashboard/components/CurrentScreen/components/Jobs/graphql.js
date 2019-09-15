@@ -76,3 +76,16 @@ export const MARK_JOB_PAID = gql`
     }
   }
 `;
+
+export const ASSIGN_CONTRACTOR = gql`
+  mutation assignContractorToJob($contractorId: ID!, $jobId: ID!) {
+    assignContractorToJob(contractorId: $contractorId, jobId: $jobId) {
+      job {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`;
