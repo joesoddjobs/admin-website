@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import moment from "moment";
 import JobsTable from "../../../../../../components/JobsTable";
 import { GET_ALL_JOBS } from "./graphql";
-import { deleteJob } from "./helpers";
+import { deleteJob, markJobCompleted, markJobPaid } from "./helpers";
 
 const Jobs = () => {
   return (
@@ -43,7 +43,7 @@ const Jobs = () => {
             formattedData.push(action);
           }
         );
-        return <JobsTable data={formattedData} deleteJob={deleteJob} />;
+        return <JobsTable data={formattedData} deleteJob={deleteJob} markJobCompleted={markJobCompleted} markJobPaid={markJobPaid} />;
       }}
     </Query>
   );
