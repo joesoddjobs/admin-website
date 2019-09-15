@@ -50,3 +50,16 @@ export const DELETE_JOB = gql`
     }
   }
 `;
+
+export const MARK_JOB_COMPLETED = gql`
+  mutation markJobCompleted($jobId: ID!, $actualTime: Int!) {
+    markJobCompleted(jobId: $jobId, actualTime: $actualTime) {
+      job {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`;

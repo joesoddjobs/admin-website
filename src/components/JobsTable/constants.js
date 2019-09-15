@@ -48,7 +48,7 @@ export const columns = [
   { title: "Status", field: "status" }
 ];
 
-export const actions = () => [
+export const actions = (setOpen, setJobId) => [
   {
     icon: tableIcons.Edit,
     tooltip: "Edit",
@@ -57,7 +57,11 @@ export const actions = () => [
   {
     icon: tableIcons.Check,
     tooltip: "Mark completed",
-    iconProps: { fontSize: "small", color: "primary" }
+    iconProps: { fontSize: "small", color: "primary" },
+    onClick: (event, { id }) => {
+      setOpen(true);
+      setJobId(id);
+    }
   }
 ];
 
