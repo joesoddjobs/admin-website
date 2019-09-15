@@ -10,7 +10,7 @@ const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-const JobsTable = ({ data, deleteJob, markJobCompleted }) => {
+const JobsTable = ({ data, deleteJob, markJobCompleted, markJobPaid }) => {
   const [open, setOpen] = useState(false);
   const [jobId, setJobId] = useState("");
   const alert = useAlert();
@@ -23,7 +23,7 @@ const JobsTable = ({ data, deleteJob, markJobCompleted }) => {
         style={{ width: "100%" }}
         title="Jobs"
         editable={editable(deleteJob, alert)}
-        actions={actions(setOpen, setJobId)}
+        actions={actions(setOpen, setJobId, markJobPaid, alert)}
         options={{
           filtering: true,
           actionsColumnIndex: -1,

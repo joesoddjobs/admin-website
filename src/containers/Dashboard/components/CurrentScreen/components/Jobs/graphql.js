@@ -63,3 +63,16 @@ export const MARK_JOB_COMPLETED = gql`
     }
   }
 `;
+
+export const MARK_JOB_PAID = gql`
+  mutation markJobPaid($jobId: ID!) {
+    markJobPaid(jobId: $jobId) {
+      job {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`;
