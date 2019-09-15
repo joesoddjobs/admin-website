@@ -7,7 +7,6 @@ const WorkersTable = ({ data, deleteContractor }) => (
     title="Workers"
     columns={columns}
     editable={editable(deleteContractor)}
-    actions={actions()}
     icons={tableIcons}
     style={{ width: "100%" }}
     options={{ filtering: true, pageSize: 10, pageSizeOptions: [10, 20, 50] }}

@@ -45,28 +45,3 @@ export const columns = [
   { title: "Address", field: "address" },
   { title: "Jobs", field: "jobs" }
 ];
-
-export const actions = () => [
-  {
-    icon: tableIcons.Edit,
-    tooltip: "Edit",
-    iconProps: { fontSize: "small", color: "primary" }
-  }
-];
-
-export const editable = (addVerifiedEmail, removeVerifiedEmail) => ({
-  onRowAdd: ({ email }) =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        // addVerifiedEmail({ variables: { email } });
-        resolve();
-      }, 1000);
-    }),
-  onRowDelete: ({ id }) =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        // removeVerifiedEmail({ variables: { id } });
-        resolve();
-      }, 1000);
-    })
-});

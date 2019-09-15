@@ -48,14 +48,6 @@ export const columns = [
   { title: "Age", field: "age" }
 ];
 
-export const actions = () => [
-  {
-    icon: tableIcons.Edit,
-    tooltip: "Edit",
-    iconProps: { fontSize: "small", color: "primary" }
-  }
-];
-
 export const editable = deleteContractor => ({
   onRowAdd: ({ email }) =>
     new Promise(resolve => {
