@@ -7,7 +7,7 @@ import WorkersTable from "../../../../../../components/WorkersTable";
 const Workers = () => {
   const alert = useAlert();
   return (
-    <Query query={GET_ALL_WORKERS}>
+    <Query errorPolicy="ignore" query={GET_ALL_WORKERS}>
       {({ loading, data, error }) => {
         if (loading) return <></>;
         if (error) {
@@ -17,10 +17,13 @@ const Workers = () => {
         const { getAllContractors } = data;
         const formattedData = [];
 
-        getAllContractors.forEach(({ address, income, ...rest }) => {
+        getAllContractors.forEach(({ address, income, jobs, ...rest }) => {
           const { state, city, street, postalCode } = address;
           const action = {
             address: `${street} ${city}, ${state} ${postalCode}`,
+            jobs: jobs.map(({ jobDescription }, index) => (
+              <ul> {`${index + 1}: ${jobDescription}`} </ul>
+            )),
             ...rest
           };
           formattedData.push(action);
