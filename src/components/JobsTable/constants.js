@@ -52,11 +52,6 @@ export const columns = [
 
 export const actions = (setOpen, setJobId, markJobPaid, alert) => [
   {
-    icon: tableIcons.Edit,
-    tooltip: "Edit",
-    iconProps: { fontSize: "small", color: "primary" }
-  },
-  {
     icon: tableIcons.Check,
     tooltip: "Mark completed",
     iconProps: { fontSize: "small", color: "primary" },
@@ -76,13 +71,6 @@ export const actions = (setOpen, setJobId, markJobPaid, alert) => [
 ];
 
 export const editable = (deleteJob, alert) => ({
-  onRowAdd: ({ email }) =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        // addVerifiedEmail({ variables: { email } });
-        resolve();
-      }, 1000);
-    }),
   onRowDelete: ({ id }) =>
     new Promise(resolve => {
       setTimeout(() => {
