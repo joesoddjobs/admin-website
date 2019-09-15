@@ -16,6 +16,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Paid from "@material-ui/icons/AttachMoney";
+import AddContractor from "@material-ui/icons/PersonAdd";
 
 export const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -36,7 +37,10 @@ export const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
-  Paid: forwardRef((props, ref) => <Paid {...props} ref={ref} />)
+  Paid: forwardRef((props, ref) => <Paid {...props} ref={ref} />),
+  AddContractor: forwardRef((props, ref) => (
+    <AddContractor {...props} ref={ref} />
+  ))
 };
 
 export const columns = [
@@ -50,7 +54,13 @@ export const columns = [
   { title: "Status", field: "status" }
 ];
 
-export const actions = (setOpen, setJobId, markJobPaid, alert) => [
+export const actions = (
+  setOpen,
+  setJobId,
+  markJobPaid,
+  alert,
+  setOpenAssign
+) => [
   {
     icon: tableIcons.Check,
     tooltip: "Mark completed",
@@ -66,6 +76,15 @@ export const actions = (setOpen, setJobId, markJobPaid, alert) => [
     iconProps: { fontSize: "small", color: "primary" },
     onClick: (event, { id }) => {
       markJobPaid(id, alert);
+    }
+  },
+  {
+    icon: tableIcons.AddContractor,
+    tooltip: "Assign contractors to job",
+    iconProps: { fontSize: "small", color: "primary" },
+    onClick: (event, { id }) => {
+      setOpenAssign(true);
+      setJobId(id);
     }
   }
 ];
