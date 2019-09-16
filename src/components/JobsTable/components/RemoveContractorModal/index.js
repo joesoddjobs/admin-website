@@ -6,10 +6,19 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Button, DialogContentText } from "@material-ui/core";
 import ModalContainer from "./styles";
 
-const AssignContractorModal = ({
-  setOpenAssign,
-  assignContractorToJob,
-  contractors,
+const formatAssignedContractors = assignedContractors => {
+  const formattedContractors = [];
+  assignedContractors.forEach(({ id, firstName, lastName }) => {
+    formattedContractors.push({ value: id, label: `${firstName} ${lastName}` });
+  });
+
+  return formattedContractors;
+};
+
+const RemoveContractorModal = ({
+  setOpenRemove,
+  removeContractorFromJob,
+  assignedContractors,
   jobId,
   alert
 }) => {
@@ -17,19 +26,19 @@ const AssignContractorModal = ({
 
   return (
     <ModalContainer>
-      <DialogTitle>Assign Contractor To Job</DialogTitle>
+      <DialogTitle>Remove Contractor From Job</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please choose a contractor to assign to this job.
+          Please choose a contractor to remove from this job.
         </DialogContentText>
         <Select
-          options={contractors}
+          options={formatAssignedContractors(assignedContractors)}
           onChange={e => setContractorId(e.value)}
         />
         <DialogActions>
           <Button
             onClick={() =>
-              assignContractorToJob(contractorId, jobId, alert, setOpenAssign)
+              removeContractorFromJob(contractorId, jobId, alert, setOpenRemove)
             }
           >
             Confirm
@@ -40,4 +49,4 @@ const AssignContractorModal = ({
   );
 };
 
-export default AssignContractorModal;
+export default RemoveContractorModal;

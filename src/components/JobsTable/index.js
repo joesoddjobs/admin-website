@@ -6,6 +6,7 @@ import MaterialTable from "material-table";
 import { tableIcons, columns, editable, actions } from "./constants";
 import ActualTimeModal from "./components/ActualTimeModal";
 import AssignContractorModal from "./components/AssignContractorModal";
+import RemoveContractorModal from "./components/RemoveContractorModal";
 
 const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -17,10 +18,13 @@ const JobsTable = ({
   markJobCompleted,
   markJobPaid,
   assignContractorToJob,
+  removeContractorFromJob,
   contractors
 }) => {
   const [open, setOpen] = useState(false);
   const [openAssign, setOpenAssign] = useState(false);
+  const [openRemove, setOpenRemove] = useState(false);
+  const [assignedContractors, setAsssignedContractors] = useState("");
   const [jobId, setJobId] = useState("");
 
   const alert = useAlert();
@@ -33,7 +37,15 @@ const JobsTable = ({
         style={{ width: "100%" }}
         title="Jobs"
         editable={editable(deleteJob, alert)}
-        actions={actions(setOpen, setJobId, markJobPaid, alert, setOpenAssign)}
+        actions={actions(
+          setOpen,
+          setJobId,
+          markJobPaid,
+          alert,
+          setOpenAssign,
+          setOpenRemove,
+          setAsssignedContractors
+        )}
         options={{
           filtering: true,
           actionsColumnIndex: -1,
@@ -63,6 +75,19 @@ const JobsTable = ({
           contractors={contractors}
           setOpenAssign={setOpenAssign}
           assignContractorToJob={assignContractorToJob}
+          jobId={jobId}
+          alert={alert}
+        />
+      </Dialog>
+      <Dialog
+        open={openRemove}
+        onClose={() => setOpenRemove(false)}
+        TransitionComponent={Transition}
+      >
+        <RemoveContractorModal
+          assignedContractors={assignedContractors}
+          setOpenRemove={setOpenRemove}
+          removeContractorFromJob={removeContractorFromJob}
           jobId={jobId}
           alert={alert}
         />

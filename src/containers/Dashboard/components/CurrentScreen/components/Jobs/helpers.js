@@ -4,7 +4,8 @@ import {
   GET_ALL_JOBS,
   MARK_JOB_COMPLETED,
   MARK_JOB_PAID,
-  ASSIGN_CONTRACTOR
+  ASSIGN_CONTRACTOR,
+  REMOVE_CONTRACTOR
 } from "./graphql";
 
 export const deleteJob = async (id, alert) => {
@@ -69,4 +70,24 @@ export const assignContractorToJob = async (
 
   setOpenAssign(false);
   return alert.success("Assigned contractor to job.");
+};
+
+export const removeContractorFromJob = async (
+  contractorId,
+  jobId,
+  alert,
+  setOpenRemove
+) => {
+  try {
+    await apolloClient.mutate({
+      mutation: REMOVE_CONTRACTOR,
+      variables: { contractorId, jobId },
+      refetchQueries: [{ query: GET_ALL_JOBS }]
+    });
+  } catch (error) {
+    return alert.error("Failed to remove contractor from job.");
+  }
+
+  setOpenRemove(false);
+  return alert.success("Removed contractor from job.");
 };
