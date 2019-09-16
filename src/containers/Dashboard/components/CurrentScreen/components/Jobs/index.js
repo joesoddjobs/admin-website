@@ -8,7 +8,8 @@ import {
   deleteJob,
   markJobCompleted,
   markJobPaid,
-  assignContractorToJob
+  assignContractorToJob,
+  removeContractorFromJob
 } from "./helpers";
 
 const Jobs = () => {
@@ -29,8 +30,6 @@ const Jobs = () => {
             label: `${firstName} ${lastName}`
           });
         });
-
-        console.log(formattedContractors);
 
         return (
           <Query query={GET_ALL_JOBS}>
@@ -56,11 +55,7 @@ const Jobs = () => {
                   const action = {
                     customer: `${firstName} ${lastName}`,
                     customerId: id,
-                    contractors: contractors.map(
-                      ({ firstName, lastName }, index) => (
-                        <ul>{`${index + 1}: ${firstName} ${lastName}`}</ul>
-                      )
-                    ),
+                    contractors,
                     status,
                     jobType,
                     rate,
@@ -80,6 +75,7 @@ const Jobs = () => {
                   markJobCompleted={markJobCompleted}
                   markJobPaid={markJobPaid}
                   assignContractorToJob={assignContractorToJob}
+                  removeContractorFromJob={removeContractorFromJob}
                   contractors={formattedContractors}
                 />
               );

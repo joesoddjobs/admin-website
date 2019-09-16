@@ -89,3 +89,16 @@ export const ASSIGN_CONTRACTOR = gql`
     }
   }
 `;
+
+export const REMOVE_CONTRACTOR = gql`
+  mutation removeContractorFromJob($contractorId: ID!, $jobId: ID!) {
+    removeContractorFromJob(contractorId: $contractorId, jobId: $jobId) {
+      job {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`;
