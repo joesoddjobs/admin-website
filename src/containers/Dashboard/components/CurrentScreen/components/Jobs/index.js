@@ -9,7 +9,8 @@ import {
   markJobCompleted,
   markJobPaid,
   assignContractorToJob,
-  removeContractorFromJob
+  removeContractorFromJob,
+  scheduleJob
 } from "./helpers";
 
 const Jobs = () => {
@@ -76,6 +77,7 @@ const Jobs = () => {
                   markJobPaid={markJobPaid}
                   assignContractorToJob={assignContractorToJob}
                   removeContractorFromJob={removeContractorFromJob}
+                  scheduleJob={scheduleJob}
                   contractors={formattedContractors}
                 />
               );

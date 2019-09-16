@@ -102,3 +102,16 @@ export const REMOVE_CONTRACTOR = gql`
     }
   }
 `;
+
+export const SCHEDULE_JOB = gql`
+  mutation scheduleJob($scheduledDateTime: String!, $jobId: ID!) {
+    scheduleJob(scheduledDateTime: $scheduledDateTime, jobId: $jobId) {
+      job {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`;

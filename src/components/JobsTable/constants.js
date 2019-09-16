@@ -18,6 +18,7 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import Paid from "@material-ui/icons/AttachMoney";
 import AddContractor from "@material-ui/icons/PersonAdd";
 import RemoveContractor from "@material-ui/icons/PersonAddDisabled";
+import ScheduleTime from "@material-ui/icons/AccessTime";
 import ContractorsList from "./components/ContractorsList";
 
 export const tableIcons = {
@@ -45,6 +46,9 @@ export const tableIcons = {
   )),
   RemoveContractor: forwardRef((props, ref) => (
     <RemoveContractor {...props} ref={ref} />
+  )),
+  ScheduleTime: forwardRef((props, ref) => (
+    <ScheduleTime {...props} ref={ref} />
   ))
 };
 
@@ -70,7 +74,8 @@ export const actions = (
   alert,
   setOpenAssign,
   setOpenRemove,
-  setAssignedContractors
+  setAssignedContractors,
+  setOpenSchedule
 ) => [
   rowData => ({
     icon: tableIcons.Check,
@@ -109,6 +114,15 @@ export const actions = (
     onClick: (event, { id }) => {
       setAssignedContractors(rowData.contractors);
       setOpenRemove(true);
+      setJobId(id);
+    }
+  }),
+  rowData => ({
+    icon: tableIcons.ScheduleTime,
+    tooltip: "Schedule time for job",
+    iconProps: { fontSize: "small", color: "primary" },
+    onClick: (event, { id }) => {
+      setOpenSchedule(true);
       setJobId(id);
     }
   })

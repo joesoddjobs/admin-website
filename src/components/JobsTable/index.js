@@ -7,6 +7,7 @@ import { tableIcons, columns, editable, actions } from "./constants";
 import ActualTimeModal from "./components/ActualTimeModal";
 import AssignContractorModal from "./components/AssignContractorModal";
 import RemoveContractorModal from "./components/RemoveContractorModal";
+import ScheduleTimeModal from "./components/ScheduleTimeModal";
 
 const Transition = forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -19,11 +20,13 @@ const JobsTable = ({
   markJobPaid,
   assignContractorToJob,
   removeContractorFromJob,
+  scheduleJob,
   contractors
 }) => {
   const [open, setOpen] = useState(false);
   const [openAssign, setOpenAssign] = useState(false);
   const [openRemove, setOpenRemove] = useState(false);
+  const [openSchedule, setOpenSchedule] = useState(false);
   const [assignedContractors, setAsssignedContractors] = useState("");
   const [jobId, setJobId] = useState("");
 
@@ -44,7 +47,8 @@ const JobsTable = ({
           alert,
           setOpenAssign,
           setOpenRemove,
-          setAsssignedContractors
+          setAsssignedContractors,
+          setOpenSchedule
         )}
         options={{
           filtering: true,
@@ -90,6 +94,18 @@ const JobsTable = ({
           removeContractorFromJob={removeContractorFromJob}
           jobId={jobId}
           alert={alert}
+        />
+      </Dialog>
+      <Dialog
+        open={openSchedule}
+        onClose={() => setOpenSchedule(false)}
+        TransitionComponent={Transition}
+      >
+        <ScheduleTimeModal
+          setOpenSchedule={setOpenSchedule}
+          jobId={jobId}
+          alert={alert}
+          scheduleJob={scheduleJob}
         />
       </Dialog>
     </>
