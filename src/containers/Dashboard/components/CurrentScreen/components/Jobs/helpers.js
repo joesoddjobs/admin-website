@@ -5,8 +5,10 @@ import {
   MARK_JOB_COMPLETED,
   MARK_JOB_PAID,
   ASSIGN_CONTRACTOR,
-  REMOVE_CONTRACTOR
+  REMOVE_CONTRACTOR,
+  SCHEDULE_JOB
 } from "./graphql";
+import moment from "moment";
 
 export const deleteJob = async (id, alert) => {
   try {
@@ -90,4 +92,28 @@ export const removeContractorFromJob = async (
 
   setOpenRemove(false);
   return alert.success("Removed contractor from job.");
+};
+
+export const scheduleJob = async (
+  scheduledDateTime,
+  jobId,
+  alert,
+  setOpenSchedule
+) => {
+  try {
+    await apolloClient.mutate({
+      mutation: SCHEDULE_JOB,
+      variables: {
+        scheduledDateTime: moment(scheduledDateTime, "YYYY-MM-DD HH:mm:SS Z"),
+        jobId
+      },
+      refetchQueries: [{ query: GET_ALL_JOBS }]
+    });
+  } catch (error) {
+    console.log(error);
+    return alert.error("Failed to schedule job.");
+  }
+
+  setOpenSchedule(false);
+  return alert.success("Job successfully scheduled.");
 };
