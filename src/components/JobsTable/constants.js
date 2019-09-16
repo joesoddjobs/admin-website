@@ -17,6 +17,8 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Paid from "@material-ui/icons/AttachMoney";
 import AddContractor from "@material-ui/icons/PersonAdd";
+import RemoveContractor from "@material-ui/icons/PersonAddDisabled";
+import ContractorsList from "./components/ContractorsList";
 
 export const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -40,13 +42,20 @@ export const tableIcons = {
   Paid: forwardRef((props, ref) => <Paid {...props} ref={ref} />),
   AddContractor: forwardRef((props, ref) => (
     <AddContractor {...props} ref={ref} />
+  )),
+  RemoveContractor: forwardRef((props, ref) => (
+    <RemoveContractor {...props} ref={ref} />
   ))
 };
 
 export const columns = [
   { title: "Customer", field: "customer" },
   { title: "Job Type", field: "jobType" },
-  { title: "Contractors", field: "contractors" },
+  {
+    title: "Contractors",
+    field: "contractors",
+    render: ({ contractors }) => <ContractorsList contractors={contractors} />
+  },
   { title: "Scheduled Date", field: "scheduledDateTime" },
   { title: "Estimated Time", field: "estimatedTime" },
   { title: "Rate", field: "rate" },
@@ -59,34 +68,50 @@ export const actions = (
   setJobId,
   markJobPaid,
   alert,
-  setOpenAssign
+  setOpenAssign,
+  setOpenRemove,
+  setAssignedContractors
 ) => [
-  {
+  rowData => ({
     icon: tableIcons.Check,
     tooltip: "Mark completed",
     iconProps: { fontSize: "small", color: "primary" },
+    hidden: rowData.status === "COMPLETED" || rowData.status === "PAID",
     onClick: (event, { id }) => {
       setOpen(true);
       setJobId(id);
     }
-  },
-  {
+  }),
+  rowData => ({
     icon: tableIcons.Paid,
     tooltip: "Mark as paid",
     iconProps: { fontSize: "small", color: "primary" },
+    hidden: rowData.status === "PAID",
     onClick: (event, { id }) => {
       markJobPaid(id, alert);
     }
-  },
-  {
+  }),
+  rowData => ({
     icon: tableIcons.AddContractor,
     tooltip: "Assign contractors to job",
     iconProps: { fontSize: "small", color: "primary" },
+    hidden: rowData.status === "COMPLETED" || rowData.status === "PAID",
     onClick: (event, { id }) => {
       setOpenAssign(true);
       setJobId(id);
     }
-  }
+  }),
+  rowData => ({
+    icon: tableIcons.RemoveContractor,
+    tooltip: "Remove contractors from job",
+    iconProps: { fontSize: "small", color: "primary" },
+    hidden: rowData.status === "COMPLETED" || rowData.status === "PAID",
+    onClick: (event, { id }) => {
+      setAssignedContractors(rowData.contractors);
+      setOpenRemove(true);
+      setJobId(id);
+    }
+  })
 ];
 
 export const editable = (deleteJob, alert) => ({
